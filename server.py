@@ -51,7 +51,7 @@ def accept_incoming_connections():
         client, client_address = server_socket.accept()
         print("%s:%s has connected." % client_address)
         client.send(
-            bytes("Welcome, please enter your username!", "utf8"))
+            str.encode("Welcome, please enter your username!", "utf8"))
         addresses[client] = client_address
         Thread(target=client_thread, args=(client,)).start()
 
