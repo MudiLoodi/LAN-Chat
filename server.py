@@ -35,7 +35,7 @@ def client_thread(client_socket):
     while True:
         msg = client_socket.recv(1024)
         if msg != str.encode("-quit", "utf8"):
-            broadcast(msg, name+": ")
+            broadcast(msg, f"> {name}: ")
         else:
             client_socket.send(str.encode("> Disconnected...", "utf8"))
             client_socket.close()
@@ -51,7 +51,7 @@ def accept_incoming_connections():
         client, client_address = server_socket.accept()
         print("%s:%s has connected." % client_address)
         client.send(
-            str.encode("Welcome, please enter your username!", "utf8"))
+            str.encode("Welcome! Please enter your username.", "utf8"))
         addresses[client] = client_address
         Thread(target=client_thread, args=(client,)).start()
 
